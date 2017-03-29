@@ -46,6 +46,60 @@ public class Valuta {
 	public void setKupovniKurs(double kupovniKurs) {
 		this.kupovniKurs = kupovniKurs;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((datumKursa == null) ? 0 : datumKursa.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(kupovniKurs);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((naziv == null) ? 0 : naziv.hashCode());
+		temp = Double.doubleToLongBits(prodajniKurs);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((skracniNaziv == null) ? 0 : skracniNaziv.hashCode());
+		temp = Double.doubleToLongBits(srednjiKurs);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Valuta other = (Valuta) obj;
+		if (datumKursa == null) {
+			if (other.datumKursa != null)
+				return false;
+		} else if (!datumKursa.equals(other.datumKursa))
+			return false;
+		if (Double.doubleToLongBits(kupovniKurs) != Double.doubleToLongBits(other.kupovniKurs))
+			return false;
+		if (naziv == null) {
+			if (other.naziv != null)
+				return false;
+		} else if (!naziv.equals(other.naziv))
+			return false;
+		if (Double.doubleToLongBits(prodajniKurs) != Double.doubleToLongBits(other.prodajniKurs))
+			return false;
+		if (skracniNaziv == null) {
+			if (other.skracniNaziv != null)
+				return false;
+		} else if (!skracniNaziv.equals(other.skracniNaziv))
+			return false;
+		if (Double.doubleToLongBits(srednjiKurs) != Double.doubleToLongBits(other.srednjiKurs))
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return "Valuta [naziv=" + naziv + ", skracniNaziv=" + skracniNaziv + ", datumKursa=" + datumKursa
+				+ ", prodajniKurs=" + prodajniKurs + ", srednjiKurs=" + srednjiKurs + ", kupovniKurs=" + kupovniKurs
+				+ "]";
+	}
 	
 	
 	

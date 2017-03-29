@@ -2,10 +2,12 @@ package valuta;
 
 import java.util.GregorianCalendar;
 
+import javax.management.RuntimeErrorException;
+
 public class Valuta {
 
 	private String naziv;
-	private String skracniNaziv;
+	private String skraceniNaziv;
 	private GregorianCalendar datumKursa;
 	private double prodajniKurs;
 	private double srednjiKurs;
@@ -14,37 +16,49 @@ public class Valuta {
 		return naziv;
 	}
 	public void setNaziv(String naziv) {
+		if(naziv == null || naziv.isEmpty()) throw new RuntimeException("Pogresan unos naziva");
 		this.naziv = naziv;
 	}
-	public String getSkracniNaziv() {
-		return skracniNaziv;
+	public String getSkraceniNaziv() {
+		
+		return skraceniNaziv;
 	}
-	public void setSkracniNaziv(String skracniNaziv) {
-		this.skracniNaziv = skracniNaziv;
+	public void setSkraceniNaziv(String skraceniNaziv) {
+		if(skraceniNaziv == null || skraceniNaziv.isEmpty()) throw new RuntimeException("Pogresan unos skracenog naziva");
+		this.skraceniNaziv = skraceniNaziv;
 	}
 	public GregorianCalendar getDatumKursa() {
+		
 		return datumKursa;
 	}
 	public void setDatumKursa(GregorianCalendar datumKursa) {
+		if(datumKursa == null) throw new RuntimeException("Datum ne sme biti null");
 		this.datumKursa = datumKursa;
 	}
 	public double getProdajniKurs() {
 		return prodajniKurs;
 	}
 	public void setProdajniKurs(double prodajniKurs) {
+		if(prodajniKurs > 0 )
 		this.prodajniKurs = prodajniKurs;
+		else throw new RuntimeException("Vrednost mora biti veca od 0");
 	}
 	public double getSrednjiKurs() {
 		return srednjiKurs;
 	}
 	public void setSrednjiKurs(double srednjiKurs) {
+		if(srednjiKurs > 0 )
 		this.srednjiKurs = srednjiKurs;
+		else throw new RuntimeException("Vrednost mora biti veca od 0");
+		
 	}
 	public double getKupovniKurs() {
 		return kupovniKurs;
 	}
 	public void setKupovniKurs(double kupovniKurs) {
+		if(kupovniKurs > 0 )
 		this.kupovniKurs = kupovniKurs;
+		else throw new RuntimeException("Vrednost mora biti veca od 0");
 	}
 	@Override
 	public int hashCode() {
@@ -57,7 +71,7 @@ public class Valuta {
 		result = prime * result + ((naziv == null) ? 0 : naziv.hashCode());
 		temp = Double.doubleToLongBits(prodajniKurs);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((skracniNaziv == null) ? 0 : skracniNaziv.hashCode());
+		result = prime * result + ((skraceniNaziv == null) ? 0 : skraceniNaziv.hashCode());
 		temp = Double.doubleToLongBits(srednjiKurs);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
@@ -85,10 +99,10 @@ public class Valuta {
 			return false;
 		if (Double.doubleToLongBits(prodajniKurs) != Double.doubleToLongBits(other.prodajniKurs))
 			return false;
-		if (skracniNaziv == null) {
-			if (other.skracniNaziv != null)
+		if (skraceniNaziv == null) {
+			if (other.skraceniNaziv != null)
 				return false;
-		} else if (!skracniNaziv.equals(other.skracniNaziv))
+		} else if (!skraceniNaziv.equals(other.skraceniNaziv))
 			return false;
 		if (Double.doubleToLongBits(srednjiKurs) != Double.doubleToLongBits(other.srednjiKurs))
 			return false;
@@ -96,7 +110,7 @@ public class Valuta {
 	}
 	@Override
 	public String toString() {
-		return "Valuta [naziv=" + naziv + ", skracniNaziv=" + skracniNaziv + ", datumKursa=" + datumKursa
+		return "Valuta [naziv=" + naziv + ", skraceniNaziv=" + skraceniNaziv + ", datumKursa=" + datumKursa
 				+ ", prodajniKurs=" + prodajniKurs + ", srednjiKurs=" + srednjiKurs + ", kupovniKurs=" + kupovniKurs
 				+ "]";
 	}

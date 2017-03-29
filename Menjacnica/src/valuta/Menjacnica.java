@@ -33,6 +33,7 @@ public class Menjacnica implements KursMetode {
 		for (int i = 0; i < kursnaLista.size(); i++) {
 			if(kursnaLista.get(i).getDatumKursa() == datum && kursnaLista.get(i).getNaziv().equals(naziv)){
 				kursnaLista.remove(i);
+				break;
 			}
 		}
 	}

@@ -15,28 +15,37 @@ public class Menjacnica implements KursMetode {
 		nova.setDatumKursa(datum);
 		nova.setNaziv(naziv);
 		nova.setSkraceniNaziv(skraceni);
-		nova.setKupovniKurs(kupovni);
 		nova.setProdajniKurs(prodajni);
 		nova.setSrednjiKurs(srednji);
-		
-		for (int i = 0; i < kursnaLista.size(); i++) {
-			Valuta v = kursnaLista.get(i);
-			if(v.getDatumKursa() ==datum && v.getNaziv().equals(naziv))
-				throw new RuntimeException("Vec postoji kurs za ovaj datum.");
-			else kursnaLista.add(v);
-			
+		nova.setKupovniKurs(kupovni);
+
+
+		if (kursnaLista.contains(nova)) {
+			throw new RuntimeException("Kurs za ovaj datum vec postoji");
 		}
+		kursnaLista.add(nova);
+
 	}
 
 	@Override
 	public void obrisiKurs(GregorianCalendar datum, String naziv) {
 		// TODO Auto-generated method stub
-
+		for (int i = 0; i < kursnaLista.size(); i++) {
+			if(kursnaLista.get(i).getDatumKursa() == datum && kursnaLista.get(i).getNaziv().equals(naziv)){
+				kursnaLista.remove(i);
+			}
+		}
 	}
 
 	@Override
 	public Valuta pronadjiKurs(GregorianCalendar datum, String naziv) {
 		// TODO Auto-generated method stub
+		for (int i = 0; i < kursnaLista.size(); i++) {
+			if(kursnaLista.get(i).getDatumKursa() == datum && kursnaLista.get(i).getNaziv().equals(naziv)){
+				return kursnaLista.get(i);
+			}else throw new RuntimeException("Ne postoji trazeni kurs");
+		}
+		
 		return null;
 	}
 
